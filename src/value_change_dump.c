@@ -46,8 +46,8 @@
 typedef enum std_logic_string_e {
 	STD_LOGIC_STRING_POSITION_0_VALUE = 0,   //!< Position of the value, '1' or '0'
 	STD_LOGIC_STRING_POSITION_1_ID,          //!< Position of the id, any ASCII character
-	STD_LOGIC_STRING_POSITION_2_NEWLINE,     //!< Position of the newline character '\n'
-	STD_LOGIC_STRING_POSITION_3_END_OF_LINE, //!< Position of the end of line character '\0'
+	STD_LOGIC_STRING_POSITION_2_NEWLINE,     //!< Position of the newline character '\\n'
+	STD_LOGIC_STRING_POSITION_3_END_OF_LINE, //!< Position of the end of line character '\\0'
 	STD_LOGIC_STRING_LENGTH_OF_BUFFER,       //!< Length of the buffer
 }std_logic_string_t;
 

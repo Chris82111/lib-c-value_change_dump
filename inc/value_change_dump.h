@@ -61,30 +61,30 @@ typedef enum std_logic_e
 //! functions with auto-completion.
 struct value_change_dump_sc
 {
-	FILE * (*Open) (const char * filename);
+	FILE * (*Open) (const char * filename); //!< @see ::value_change_dump_open()
 
 	struct {
-		void (*Print01_Date) (FILE *f, const char * data);
-		void (*Print02_Version) (FILE *f, const char * version);
-		void (*Print03_Timescale) (FILE *f, const char * timescale);
-		void (*Print04_ScopeStart) (FILE *f, const char * scope);
-		void (*Print05_Bit) (FILE *f, char id, const char * name);
-		void (*Print05_Vector) (FILE *f, char id, int8_t msb, int8_t lsb, const char * name);
-		void (*Print05_Real) (FILE *f, char id, const char * name);
-		void (*Print05_String) (FILE *f, char id, const char * name);
-		void (*Print06_ScopeEnd) (FILE *f);
-		void (*Print07_Enddef) (FILE *f);
-		void (*Print08_Dumpvars) (FILE *f);
-	}Header;
+		void (*Print01_Date) (FILE *f, const char * data); //!< @see ::value_change_dump_print_header_01_date()
+		void (*Print02_Version) (FILE *f, const char * version); //!< @see ::value_change_dump_print_header_02_version()
+		void (*Print03_Timescale) (FILE *f, const char * timescale); //!< @see ::value_change_dump_print_header_03_timescale()
+		void (*Print04_ScopeStart) (FILE *f, const char * scope); //!< @see ::value_change_dump_print_header_04_scope_start()
+		void (*Print05_Bit) (FILE *f, char id, const char * name); //!< @see ::value_change_dump_print_header_05_bit()
+		void (*Print05_Vector) (FILE *f, char id, int8_t msb, int8_t lsb, const char * name); //!< @see ::value_change_dump_print_header_05_vector()
+		void (*Print05_Real) (FILE *f, char id, const char * name); //!< @see ::value_change_dump_print_header_05_real()
+		void (*Print05_String) (FILE *f, char id, const char * name); //!< @see ::value_change_dump_print_header_05_string()
+		void (*Print06_ScopeEnd) (FILE *f); //!< @see ::value_change_dump_print_header_06_scope_end()
+		void (*Print07_Enddef) (FILE *f); //!< @see ::value_change_dump_print_header_07_enddef()
+		void (*Print08_Dumpvars) (FILE *f); //!< @see ::value_change_dump_print_header_08_dumpvars()
+	}Header; //!< Groups all header functions
 
-	void (*PrintTimestamp) (FILE *f, uint64_t timestamp);
-	void (*PrintBit) (FILE *f, char id, bool value);
-	void (*PrintStdLogic) (FILE *f, char id, char state);
-	void (*PrintVector) (FILE *f, char id, uint8_t length, uint64_t value);
-	void (*PrintReal) (FILE *f, char id, double value);
-	void (*PrintString) (FILE *f, char id, const char * str);
+	void (*PrintTimestamp) (FILE *f, uint64_t timestamp); //!< @see ::value_change_dump_print_timestamp()
+	void (*PrintBit) (FILE *f, char id, bool value); //!< @see ::value_change_dump_print_bit()
+	void (*PrintStdLogic) (FILE *f, char id, char state); //!< @see ::value_change_dump_print_std_logic()
+	void (*PrintVector) (FILE *f, char id, uint8_t length, uint64_t value); //!< @see ::value_change_dump_print_vector()
+	void (*PrintReal) (FILE *f, char id, double value); //!< @see ::value_change_dump_print_real()
+	void (*PrintString) (FILE *f, char id, const char * str); //!< @see ::value_change_dump_print_string()
 
-	void (*Close) (FILE * f);
+	void (*Close) (FILE * f); //!< @see ::value_change_dump_close()
 };
 
 
@@ -96,7 +96,7 @@ struct value_change_dump_sc
 //!
 //! @details This file pointer must be closed, use ::fclose() or ::value_change_dump_close()
 //!
-//! @param[in] filename Path and file name as `\0` terminated c string
+//! @param[in] filename Path and file name as '\\0' terminated c string
 //! @return Returns a file pointer for writing to the file
 FILE * value_change_dump_open(const char * filename);
 
@@ -105,7 +105,7 @@ FILE * value_change_dump_open(const char * filename);
 //! @details Date, normally use `__DATE__`
 //!
 //! @param[in,out] f File pointer to which is written
-//! @param[in] data Date as `\0` terminated c string
+//! @param[in] data Date as '\\0' terminated c string
 void value_change_dump_print_header_01_date(FILE *f, const char * data);
 
 //! @brief Writes part of the header
@@ -113,18 +113,18 @@ void value_change_dump_print_header_01_date(FILE *f, const char * data);
 //! @details Information about the version
 //!
 //! @param[in,out] f File pointer to which is written
-//! @param[in] version Version as `\0` terminated c string
+//! @param[in] version Version as '\\0' terminated c string
 void value_change_dump_print_header_02_version(FILE *f, const char * version);
 
 //! @brief Writes part of the header
 //!
 //! @details Time specification, consisting of an integer 1, 10 or 100 and unit.
 //! This is appended without spaces, consists of a unit prefix and the time unit character 's'.
-//! The following are valid: `"s"`, `"ms"`, `"us"`, `"ns"`, `"ps"`, and `"fs"`.
-//! An example is `"10ns"`
+//! The following are valid: "s", "ms", "us", "ns", "ps", and "fs".
+//! An example is "10ns"
 //!
 //! @param[in,out] f File pointer to which is written
-//! @param[in] timescale Time scale as `\0` terminated c string
+//! @param[in] timescale Time scale as '\\0' terminated c string
 void value_change_dump_print_header_03_timescale(FILE *f, const char * timescale);
 
 //! @brief Writes part of the header
@@ -133,7 +133,7 @@ void value_change_dump_print_header_03_timescale(FILE *f, const char * timescale
 //! requires a matching closing tag ::value_change_dump_print_header_06_scope_end()
 //!
 //! @param[in,out] f File pointer to which is written
-//! @param[in] scope Name of the scope as `\0` terminated c string
+//! @param[in] scope Name of the scope as '\\0' terminated c string
 void value_change_dump_print_header_04_scope_start(FILE *f, const char * scope);
 
 //! @brief Writes part of the header.
@@ -143,7 +143,7 @@ void value_change_dump_print_header_04_scope_start(FILE *f, const char * scope);
 //!
 //! @param[in,out] f File pointer to which is written
 //! @param id An ID as a single character
-//! @param[in] name Name of the signal as `\0` terminated c string
+//! @param[in] name Name of the signal as '\\0' terminated c string
 void value_change_dump_print_header_05_bit(FILE *f, char id, const char * name);
 
 //! @brief Writes part of the header.
@@ -156,7 +156,7 @@ void value_change_dump_print_header_05_bit(FILE *f, char id, const char * name);
 //! @param id An ID as a single character
 //! @param msb Most Significant Bit (MSB) index of the vector
 //! @param lsb Least Significant Bit (LSB) index of the vector
-//! @param[in] name Name of the signal as `\0` terminated c string
+//! @param[in] name Name of the signal as '\\0' terminated c string
 void value_change_dump_print_header_05_vector(FILE *f, char id, int8_t msb, int8_t lsb, const char * name);
 
 //! @brief Writes part of the header.
@@ -166,7 +166,7 @@ void value_change_dump_print_header_05_vector(FILE *f, char id, int8_t msb, int8
 //!
 //! @param[in,out] f File pointer to which is written
 //! @param id An ID as a single character
-//! @param[in] name Name of the signal as `\0` terminated c string
+//! @param[in] name Name of the signal as '\\0' terminated c string
 void value_change_dump_print_header_05_real(FILE *f, char id, const char * name);
 
 //! @brief Writes part of the header.
@@ -176,7 +176,7 @@ void value_change_dump_print_header_05_real(FILE *f, char id, const char * name)
 //!
 //! @param[in,out] f File pointer to which is written
 //! @param id An ID as a single character
-//! @param[in] name Name of the signal as `\0` terminated c string
+//! @param[in] name Name of the signal as '\\0' terminated c string
 void value_change_dump_print_header_05_string(FILE *f, char id, const char * name);
 
 //! @brief Writes part of the header
@@ -256,7 +256,7 @@ void value_change_dump_print_real(FILE *f, char id, double value);
 //!
 //! @param[in,out] f File pointer to which is written
 //! @param id An ID as a single character
-//! @param[in] str String/Name of a state as `\0` terminated c string
+//! @param[in] str String/Name of a state as '\\0' terminated c string
 void value_change_dump_print_string(FILE *f, char id, const char * str);
 
 //! @brief Closes the file handler
