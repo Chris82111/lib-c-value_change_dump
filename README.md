@@ -2,6 +2,13 @@
 
 This library provides functions that can be used to create a value change dump (VCD) file.
 
+A VCD file is a standardized file format used primarily in digital electronics and hardware
+simulation to record the changes in signal values over time.
+It is most used in hardware description language (HDL) to design and simulation of
+digital systems such as FPGAs, ASICs, and other integrated circuits.
+The VCD files are typically generated during simulations to analyze signal behavior.
+A viewer such as [GTKWave](https://github.com/gtkwave/gtkwave) can be used to display the files.
+
 ## Output
 
 The output of GTKWave can be exported as PDF, [output](./docs/gtkwave_output.pdf). The PDF output can optionally be cropped using vector editing programs such as Inkscape. In this way, signals can be displayed very easily.
